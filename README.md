@@ -17,45 +17,45 @@ _resolution:_
   ```python
    def gsheet_into_df(urlbase, sheet_key, worksheet_id, file, first_column, last_column):
 
-    url_domain = '%s/ccc?key=%s&gid=%s&output=csv' % (urlbase, sheet_key, worksheet_id)
+      url_domain = '%s/ccc?key=%s&gid=%s&output=csv' % (urlbase, sheet_key, worksheet_id)
 
-    try:
-        date_parser = lambda x: datetime.datetime.strptime(x, "%d/%m/%Y")
-        last_proc_dates = pd.read_csv(file, header = 0, parse_dates = [0], date_parser = date_parser)
-    except:
-        print('File %s not found -- All data will be loaded' % file)
-        next_row_to_read = 0
-    else:
-        next_row_to_read = last_proc_dates.shape[0] + 2
+      try:
+          date_parser = lambda x: datetime.datetime.strptime(x, "%d/%m/%Y")
+          last_proc_dates = pd.read_csv(file, header = 0, parse_dates = [0], date_parser = date_parser)
+      except:
+          print('File %s not found -- All data will be loaded' % file)
+          next_row_to_read = 0
+      else:
+          next_row_to_read = last_proc_dates.shape[0] + 2
 
-    try:
-        url = '%s&range=A:A' % url_domain
-        r = requests.get(url)
-    except:
-        raise IOError('URL %s not reached' % url)
+      try:
+          url = '%s&range=A:A' % url_domain
+          r = requests.get(url)
+      except:
+          raise IOError('URL %s not reached' % url)
         
-    try:
-        date_parser = lambda x: datetime.datetime.strptime(x, "%m/%d/%Y %H:%M:%S")
-        dates = pd.read_csv(BytesIO(r.content), 
-                            parse_dates = ['1'], date_parser = date_parser) 
-    except:
-        raise IOError('Data not loaded')
-    else:
-        row_total = len(dates)
+      try:
+          date_parser = lambda x: datetime.datetime.strptime(x, "%m/%d/%Y %H:%M:%S")
+          dates = pd.read_csv(BytesIO(r.content), 
+                              parse_dates = ['1'], date_parser = date_parser) 
+      except:
+          raise IOError('Data not loaded')
+      else:
+          row_total = len(dates)
 
-    if row_total < next_row_to_read:  
-        return None # [0]     
+      if row_total < next_row_to_read:  
+          return None # [0]     
     
-    try:
-        cell_range = '%s%s:%s%s' % (first_column, next_row_to_read, last_column, row_total)
-        url = '%s&range=%s' % (url_domain, cell_range)
-        r = requests.get(url)
-    except:
-        raise IOError('URL %s not reached' % url)
-    else:
-        df = pd.read_csv(BytesIO(r.content), header = None) 
+      try:
+          cell_range = '%s%s:%s%s' % (first_column, next_row_to_read, last_column, row_total)
+          url = '%s&range=%s' % (url_domain, cell_range)
+          r = requests.get(url)
+      except:
+          raise IOError('URL %s not reached' % url)
+      else:
+          df = pd.read_csv(BytesIO(r.content), header = None) 
         
-    return df
+      return df
   ```
   * packages `gspread` and `oauth2client` are discarded since no authentication is required; instead `requests` objects are used,
   * package `tqdm` is also discarded for compatibility with the workflow.
