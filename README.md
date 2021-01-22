@@ -96,7 +96,7 @@ _resolution:_
       run: |
         python ODP_datasets_formats_update.py
   ```
-  * output datasets are committed back to the repo:
+  * output datasets are committed back to the repo (see [actions marketplace](https://github.com/EndBug/add-and-commit)):
   ```yaml
       uses: EndBug/add-and-commit@v4
       with:
