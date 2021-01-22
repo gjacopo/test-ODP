@@ -8,7 +8,7 @@ name: Automated script running on schedule and commit
 
 on:
   schedule: 
-    - cron: "0/2 * * * *"
+    - cron: "0 7 * * *"
   push:
     branches: 
       - master
