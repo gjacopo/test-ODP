@@ -12,7 +12,7 @@ _constraints:_
 3. operations are run from a `Jupyter` notebook (rather than using a script or a library): **[`ODP_datasets_formats_update.ipynb`](https://github.com/ceperezegma/ODP_datasets_distributions/blob/main/ODP_datasets_formats_update.ipynb)** ([preview](https://nbviewer.jupyter.org/github/ceperezegma/ODP_datasets_distributions/blob/main/ODP_datasets_formats_update.ipynb))
 
 _resolution:_
-* the **updated notebook [`ODP_datasets_formats_update.ipynb`](./ODP_datasets_formats_update.ipynb)** ([preview](https://nbviewer.jupyter.org/github/gjacopo/test-ODP/blob/main/ODP_datasets_formats_update.ipynb)) enables to circumvent constraint \#3 by accessing and fetching the data from the _Google_ spreadsheet without the need to authenticate:
+* the **updated notebook [`ODP_datasets_formats_update.ipynb`](./ODP_datasets_formats_update.ipynb)** ([preview](https://nbviewer.jupyter.org/github/gjacopo/test-ODP/blob/main/ODP_datasets_formats_update.ipynb)) enables to circumvent constraint \#2 by accessing and fetching the data from the _Google_ spreadsheet without the need to authenticate:
   * the **function `gsheet_into_df`** is defined in place of `set_google_drive_access_scope`, `access_google_sheet` and `last_processed_date` to avoid using _Google_ API and service authentication:
   ```python
    def gsheet_into_df(urlbase, sheet_key, worksheet_id, file, first_column, last_column):
