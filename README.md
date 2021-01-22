@@ -60,7 +60,7 @@ _resolution:_
   * packages `gspread` and `oauth2client` are discarded since no authentication is required; instead `requests` objects are used,
   * package `tqdm` is also discarded for compatibility with the workflow.
   * references to local data/variables are discarded (*e.g.*, local path, local credentials data, *etc...*),
-* the *action configuration file [`automated.yml`](.github/workflows/automated.yml)* is used to automatically run the production of ODP:
+* the **action configuration file [`automated.yml`](.github/workflows/automated.yml)** is used to automatically run the production of ODP:
   * the repo is checked out (see [actions marketplace](https://github.com/actions/checkout)):
   ```yaml
         uses: actions/checkout@v2 
